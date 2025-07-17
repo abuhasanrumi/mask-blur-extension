@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Text Mask & Blur",
+  "name": "Mask or Blur Text",
   "version": "1.0",
   "permissions": [
     "contextMenus",
