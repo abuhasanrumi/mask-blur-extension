@@ -100,9 +100,15 @@ function saveMaskedData(text, action, maskChar, selector) {
 chrome.storage.local.get([location.hostname], (res) => {
   const entries = res[location.hostname] || []
   if (entries.length) {
-    requestIdleCallback(() => applySavedMasks(entries))
+    // Run as soon as DOM is interactive
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => applySavedMasks(entries))
+    } else {
+      applySavedMasks(entries)
+    }
   }
 })
+
 
 function applySavedMasks(entries) {
   for (const { text, action, maskChar, selector } of entries) {
